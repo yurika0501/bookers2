@@ -36,7 +36,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :name
       ## 自己紹介を保存するカラム
       t.text :introduction
-
       t.timestamps null: false
     end
 

@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @book = Book.new
+    @user = User.find(current_user.id)
   end
 
   # def create
@@ -33,6 +33,6 @@ class BooksController < ApplicationController
   private
   # ストロングパラメータ
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :image)
   end
 end
