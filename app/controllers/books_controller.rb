@@ -5,6 +5,8 @@ class BooksController < ApplicationController
 
   def index
     @user = User.find(current_user.id)
+    @book = Book.new
+    
   end
 
   # def create
@@ -25,14 +27,25 @@ class BooksController < ApplicationController
   end
 
   def show
+    @user = User.find(current_user.id)
+    @books = Book.all
   end
 
   def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @book = Book.find(params[:id])
+    @book.update(book_params)
+    redirect_to book_path(@book.id)  
   end
   
   private
   # ストロングパラメータ
   def book_params
-    params.require(:book).permit(:title, :body, :image)
+    params.require(:book).permit(:title, :body)
+    # ユーザーに紐づいてるのでuserのストロングパラメはいらない。つけるんだったら新しくメソッドを増やして記述
+    # params.require(:user).permit(:name, :introduction, :profile_image)
   end
 end
