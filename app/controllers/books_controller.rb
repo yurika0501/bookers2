@@ -23,18 +23,28 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
-    @book.save
-    redirect_to book_path(@book.id)
+    if @book.save
+      redirect_to book_path(@book.id)
+    else
+      render :new
+    end
   end
 
   def show
     @user = User.find(current_user.id)
-    @book = Book.new
-    @books = Book.all
+    @newbook = Book.new # @bookを他で使いたかったので「new」を追記
+    @books = Book.all # いらないと思うが消したらエラーになる
+    @book = Book.find(params[:id])
   end
 
   def edit
     @user = User.find(params[:id])
+  end
+  
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    redirect_to books_path
   end
   
   def update
