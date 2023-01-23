@@ -33,12 +33,14 @@ class BooksController < ApplicationController
   def show
     @user = User.find(current_user.id)
     @newbook = Book.new # @bookを他で使いたかったので「new」を追記
-    @books = Book.all # いらないと思うが消したらエラーになる
+    @books = Book.all #いらないと思うが消したらエラーになる
     @book = Book.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
+    # @newbook = Book.new #違ってたらパラムスに変更
+    @book = Book.find(params[:id])
   end
   
   def destroy
