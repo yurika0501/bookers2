@@ -1,11 +1,12 @@
-<main>
-  <div class="container px-5 px-sm-0">
-    <div class="row">
+
+  <main>
+    <div class="container px-5 px-sm-0">
+      <div class="row">
         <div class="col-md-3">
           <h2>User info</h2>
           <!--プロフ画像の表示を実装-->
-            <% if @user.profile_image.attached? %><!--ユーザーの画像は設定されてる？-->
-              <%= image_tag @user.profile_image, size: "100x100" %><!--ユーザーの画像が設定されてる場合はこのサイズで表示-->
+            <% if user.profile_image.attached? %><!--ユーザーの画像は設定されてる？-->
+              <%= image_tag user.profile_image, size: "100x100" %><!--ユーザーの画像が設定されてる場合はこのサイズで表示-->
             <% else %><!--ユーザーの画像が設定されていない場合は下記を実行して-->
               <%= image_tag 'default-image', size: "100x100" %><!--ユーザーの画像が設定されてる場合はassetsに入ってる「'default-image'」を使う-->
             <% end %>
@@ -15,17 +16,17 @@
                     <tr></tr>
                     <tr>
                       <th>name</th>
-                      <th><%= @user.name %></th>
+                      <th><%= user.name %></th>
                     </tr>
                     <tr>
                       <th>introduction</th>
-                      <th><%= @user.introduction %></th>
+                      <th><%= user.introduction %></th>
                     </tr>
                 </tbody>
             </table>
             <div class="row">
               <!--プロフィール編集ボタン-->
-              <%= link_to edit_user_path(@user), class:"btn btn-outline-secondary btn-block" do %>
+              <%= link_to edit_user_path(user), class:"btn btn-outline-secondary btn-block" do %>
               <i class="fa-solid fa-user-gear"></i>
               <% end %>
             </div>
