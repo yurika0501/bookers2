@@ -13,6 +13,10 @@ class User < ApplicationRecord
   # プロフィール画像を保存できる設定
   has_one_attached :profile_image
 
+  # バリデーション実装
+  validates :name, presence: true
+
+  
   def get_profile_image(w, h)#w, hはwidth.height
     unless profile_image.attached?
      file_path = Rails.root.join('app/assets/images/default-image.jpg')
