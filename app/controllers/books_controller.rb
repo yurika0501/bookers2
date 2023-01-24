@@ -35,11 +35,10 @@ class BooksController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user.id)#これで投稿してるユーザーのプロフや名前が表示されない
-    # @user = User.find(params[:id]) #上を消してこのコードにすると投稿者のプロフと名前になるが、投稿ができなく
     @newbook = Book.new # @bookを他で使いたかったので「new」を追記
     @books = Book.all #いらないと思うが消したらエラーになる
     @book = Book.find(params[:id])
+    @user = @book.user
   end
 
   def edit
