@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit]
   
   def new
     @books = Book.new
@@ -34,7 +35,8 @@ class BooksController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user.id)
+    @user = User.find(current_user.id)#これで投稿してるユーザーのプロフや名前が表示されない
+    # @user = User.find(params[:id]) #上を消してこのコードにすると投稿者のプロフと名前になるが、投稿ができなく
     @newbook = Book.new # @bookを他で使いたかったので「new」を追記
     @books = Book.all #いらないと思うが消したらエラーになる
     @book = Book.find(params[:id])
@@ -69,4 +71,12 @@ class BooksController < ApplicationController
     # ユーザーに紐づいてるのでuserのストロングパラメはいらない。つけるんだったら新しくメソッドを増やして記述
     # params.require(:user).permit(:name, :introduction, :profile_image)
   end
+  
+  def is_matching_login_user
+    user_id = Book.find(params[:id]).user.id
+    unless user_id == current_user.id
+      redirect_to books_path
+    end
+  end
+  
 end
