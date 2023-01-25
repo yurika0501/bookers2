@@ -16,7 +16,9 @@
                   <tr>
                       <td>
                           <!--アイコン-->
-                          <%= image_tag book.user.get_profile_image(80,80) %>
+                        <%= link_to user_path(@user.id) do %>
+                            <%= image_tag book.user.get_profile_image(80,80) %>
+                        <% end %>
                       </td>
                       <td>
                           <!--books詳細リンク付きタイトル実装-->
